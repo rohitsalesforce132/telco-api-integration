@@ -1,0 +1,2 @@
+# Pure Python stdlib - ZERO external dependencies
+# No packages required - all tests use unittest.TestCase (not pytest)
