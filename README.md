@@ -1,6 +1,6 @@
 # Telco API Integration Platform
 
-A production-grade Python platform implementing 4 real telecom APIs that an Azure DevOps Engineer at AT&T would work with.
+A production-grade Python platform implementing 4 real telecom APIs that an Azure DevOps Engineer would work with.
 
 ## Features
 
@@ -145,8 +145,8 @@ Collects metrics, runs health checks, maintains audit trails, provides distribut
 - **TMF620**: TM Forum Product Catalog Management API
 - **TMF622**: TM Forum Product Ordering Management API
 - **CAMARA**: CAMARA Open API specifications (SIM Swap, Number Verification)
-- **OA Billing**: AT&T internal billing integration patterns
+- **OA Billing**: internal billing integration patterns
 
 ## License
 
-Internal AT&T project - Not for external distribution.
+Internal project - Not for external distribution.

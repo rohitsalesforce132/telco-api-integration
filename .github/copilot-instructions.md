@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is the **Telco API Integration Platform** - a production-grade Python platform implementing telecom APIs for AT&T.
+This is the **Telco API Integration Platform** - a production-grade Python platform implementing telecom APIs for telecom.
 
 ## Architecture
 
@@ -11,6 +11,10 @@ src/
 ├── tmf931/              # TMF931 Resource Catalog (TM Forum)
 │   ├── catalog/         # Resource catalog management
 │   └── inventory/       # Resource inventory management
+├── tmf620/              # TMF620 Product Catalog (TM Forum)
+│   └── catalog/         # Product catalog management (offerings, specs, pricing, bundles)
+├── tmf622/              # TMF622 Product Ordering (TM Forum)
+│   └── ordering/        # Product ordering (lifecycle, fulfillment, compensation)
 ├── camara/              # CAMARA APIs
 │   ├── sim_swap/        # CAMARA SIM Swap Detection
 │   └── number_verify/   # CAMARA Number Verification
@@ -26,7 +30,7 @@ src/
 
 ### 1. Pure Python stdlib ONLY
 - **NO external dependencies** - not even pytest
-- Use only: `dataclasses`, `enum`, `time`, `threading`, `collections`, `json`, `random`, `string`
+- Use only: `dataclasses`, `enum`, `time`, `threading`, `collections`, `json`, `random`, `string`, `uuid`, `datetime`, `copy`
 - No `pip install` required
 
 ### 2. Real Classes Only
@@ -40,6 +44,7 @@ src/
 - Test methods: `test_*`
 - Use `self.assertX()` methods, NOT plain `assert`
 - All tests must pass: `python3 -m unittest discover -s tests -p "test_*.py"`
+- Target: 300+ tests ALL PASSING
 
 ### 4. Documentation
 - All classes must have docstrings
@@ -55,6 +60,29 @@ src/
 - Support TMF search syntax: `field=value`, `field.gt=value`, `field.in=value`
 - Use CatalogLifecycleState enum for states
 - Use ResourceSpecType enum (LOGICAL, PHYSICAL, HYBRID)
+
+### TMF620 Product Catalog
+- Follow TM Forum TMF620 standard
+- Product offerings with pricing models (one-time, recurring, usage-based, tiered)
+- Product specifications with characteristics and constraints
+- Product bundling with discount support (percentage, fixed, buy-x-get-y)
+- Product eligibility checking with rule-based engine
+- Product categorization with hierarchical tree structure
+- TMF620 export format (JSON)
+- Use ProductLifecycleState enum for offering states
+- Use PricingType enum for pricing models
+
+### TMF622 Product Ordering
+- Follow TM Forum TMF622 standard
+- Order lifecycle: acknowledged → in_progress → completed/failed/cancelled/partial
+- Quote management with validity periods and state transitions
+- Order validation engine for feasibility, pricing, and eligibility
+- Fulfillment orchestration with pluggable handlers for TMF931 and CAMARA integration
+- Compensation/rollback for failed or cancelled orders
+- Notification manager with webhook support
+- Use OrderState enum for order states
+- Use OrderItemState enum for item states
+- Use QuoteState enum for quote states
 
 ### CAMARA APIs
 - Follow CAMARA Open API specifications
@@ -192,10 +220,11 @@ python3 -m unittest discover -s tests -p "test_*.py" -v
 ## Goals
 
 - Build production-grade telecom API integration platform
-- Implement TMF931, CAMARA, and OA Billing standards
-- Achieve 150+ tests ALL PASSING
+- Implement TMF931, TMF620, TMF622, CAMARA, and OA Billing standards
+- Achieve 300+ tests ALL PASSING
 - Zero external dependencies
 - Real, working classes with no stubs
+- 5-tier architecture: Resource Layer → Product Layer → Network APIs → Billing → Cross-Cutting
 
 ## Priority
 
